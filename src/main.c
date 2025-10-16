@@ -72,4 +72,8 @@ int	main(int narg, char **argv)
 	else
 		return (1);
 	ft_init(&vars);
+	vars.sprites = (t_sprite *)malloc(sizeof(t_sprite));
+	ft_initsprites(&vars);
+	vars.res = RES * g;
+	ft_beginwin(&vars);
 }

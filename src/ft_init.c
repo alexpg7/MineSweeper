@@ -70,6 +70,14 @@ void	ft_putmines(t_vars *vars)
 	srand(time(NULL));
 	g = vars->grid;
 	nmines = 40 - (16 - g) * 30 / 7;
+	for (int i = 0; i < g; i++)
+	{
+		for (j = 0; j < g; j++)
+		{
+			vars->mat2[i][j] = 'O';
+		}
+		vars->mat2[i][j] = '\0';
+	}
 	for (int k = 0; k < nmines; k++)
 	{
 		r = rand() % (g * g);
@@ -100,7 +108,7 @@ void	ft_init(t_vars *vars)
 	vars->mat = (char **)malloc(sizeof(char *) * (g + 1));
 	vars->mat2 = (char **)malloc(sizeof(char *) * (g + 1));
 	if (!vars->mat || !vars->mat2)
-		ft_exit(1, vars);
+		ft_exit(vars, 1);
 	for (i = 0; i <= g; i++)
 	{
 		vars->mat[i] = NULL;
@@ -111,7 +119,7 @@ void	ft_init(t_vars *vars)
 		vars->mat[i] = (char *)malloc(sizeof(char) * (g + 1));
 		vars->mat2[i] = (char *)malloc(sizeof(char) * (g + 1));
 		if (!(vars->mat[i]) || !(vars->mat2[i]))
-			ft_exit(1, vars);
+			ft_exit(vars, 1);
 	}
 	ft_putgrid(vars);
 	ft_putmines(vars);

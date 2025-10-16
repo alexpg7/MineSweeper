@@ -7,7 +7,18 @@
 #include <errno.h>
 #include <signal.h>
 
-#define RES 25 //resolution of a cell
+#define RES 50 //resolution of a cell
+#define PIX 14
+
+//COLORS
+#define GREY 0x898989
+#define GREY2 0x747474
+#define WHITE 0xBDBDBD
+
+typedef struct s_sprite
+{
+	char	**cell;
+}	t_sprite;
 
 typedef struct s_vars
 {
@@ -23,7 +34,11 @@ typedef struct s_vars
 	char	**mat; //indicates the hidden cells
 	char	**mat2; //indicates the mines and numbers
 	int		n;
+	t_sprite	*sprites;
 }	t_vars;
 
-void	ft_exit(int ex, t_vars *vars);
+int		ft_exit(t_vars *vars, int ex);
 void	ft_init(t_vars *vars);
+void	ft_beginwin(t_vars *vars);
+void	ft_initsprites(t_vars *vars);
+void	ft_paintboard(t_vars *vars);
