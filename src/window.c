@@ -24,6 +24,7 @@ void	ft_beginwin(t_vars *vars)
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);
 	mlx_hook(vars->win, 17, 0L, ft_exit, vars);
+	mlx_mouse_hook(vars->win, mouse_hook, vars);
 	ft_paintboard(vars);
 	mlx_loop(vars->mlx);
 }

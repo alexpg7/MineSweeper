@@ -12,6 +12,18 @@ void	ft_freechararr(char **str)
 void	ft_freesprites(t_sprite *sprites)
 {
 	ft_freechararr(sprites->cell);
+	ft_freechararr(sprites->num0);
+	ft_freechararr(sprites->num1);
+	ft_freechararr(sprites->num2);
+	ft_freechararr(sprites->num3);
+	ft_freechararr(sprites->num4);
+	ft_freechararr(sprites->num5);
+	ft_freechararr(sprites->num6);
+	ft_freechararr(sprites->num7);
+	ft_freechararr(sprites->num8);
+	ft_freechararr(sprites->num9);
+	ft_freechararr(sprites->mine);
+	ft_freechararr(sprites->flag);
 }
 
 int	ft_exit(t_vars *vars, int ex)
