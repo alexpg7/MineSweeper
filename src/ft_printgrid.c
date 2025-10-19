@@ -43,7 +43,7 @@ unsigned int	ft_colorconversion(char c, int mode)
 		return (WHITE);
 }
 
-void	ft_paintcell(int x, int y, char **sprit, t_vars *vars)
+void	ft_paintcell(int x, int y, char **sprit, t_vars *vars, int mode)
 {
 	int	pixX = x % RES; //coordinates in sprite
 	int	pixY = y % RES;
@@ -51,34 +51,40 @@ void	ft_paintcell(int x, int y, char **sprit, t_vars *vars)
 
 	pixX = pixX * PIX / RES; //pixels in sprite
 	pixY = pixY * PIX / RES;
-	color = ft_colorconversion(sprit[pixY][pixX], 0);
+	color = ft_colorconversion(sprit[pixY][pixX], mode);
 	pixel_put(vars, x, y, color);
 }
 
-void	ft_paintsprite(int x, int y, t_vars *vars, char c)
+void	ft_paintsprite(int x, int y, t_vars *vars, char c, int pi, int pj)
 {
+	int	mode = 0;
+
 	if (c == ' ')
-		ft_paintcell(x, y, vars->sprites->num0, vars);
+		ft_paintcell(x, y, vars->sprites->num0, vars, mode);
 	else if (c == '1')
-		ft_paintcell(x, y, vars->sprites->num1, vars);
+		ft_paintcell(x, y, vars->sprites->num1, vars, mode);
 	else if (c == '2')
-		ft_paintcell(x, y, vars->sprites->num2, vars);
+		ft_paintcell(x, y, vars->sprites->num2, vars, mode);
 	else if (c == '3')
-		ft_paintcell(x, y, vars->sprites->num3, vars);
+		ft_paintcell(x, y, vars->sprites->num3, vars, mode);
 	else if (c == '4')
-		ft_paintcell(x, y, vars->sprites->num4, vars);
+		ft_paintcell(x, y, vars->sprites->num4, vars, mode);
 	else if (c == '5')
-		ft_paintcell(x, y, vars->sprites->num5, vars);
+		ft_paintcell(x, y, vars->sprites->num5, vars, mode);
 	else if (c == '6')
-		ft_paintcell(x, y, vars->sprites->num6, vars);
+		ft_paintcell(x, y, vars->sprites->num6, vars, mode);
 	else if (c == '7')
-		ft_paintcell(x, y, vars->sprites->num7, vars);
+		ft_paintcell(x, y, vars->sprites->num7, vars, mode);
 	else if (c == '8')
-		ft_paintcell(x, y, vars->sprites->num8, vars);
+		ft_paintcell(x, y, vars->sprites->num8, vars, mode);
 	else if (c == '9')
-		ft_paintcell(x, y, vars->sprites->num9, vars);
+		ft_paintcell(x, y, vars->sprites->num9, vars, mode);
 	else if (c == 'M')
-		ft_paintcell(x, y, vars->sprites->mine, vars);
+	{
+		if (vars->cx == pi && vars->cy == pj)
+			mode = 1;
+		ft_paintcell(x, y, vars->sprites->mine, vars, mode);
+	}
 }
 
 void	ft_paintboard(t_vars *vars)
@@ -98,11 +104,11 @@ void	ft_paintboard(t_vars *vars)
 			pi = i * g / res; //coordinates in board
 			pj = j * g / res;
 			if (vars->mat[pi][pj] == 'X')
-				ft_paintcell(i, j, vars->sprites->cell, vars);
+				ft_paintcell(i, j, vars->sprites->cell, vars, 0);
 			else if (vars->mat[pi][pj] == 'F')
-				ft_paintcell(i, j, vars->sprites->flag, vars);
+				ft_paintcell(i, j, vars->sprites->flag, vars, 0);
 			else
-				ft_paintsprite(i, j, vars, vars->mat2[pi][pj]);
+				ft_paintsprite(i, j, vars, vars->mat2[pi][pj], pi, pj);
 			j++;
 		}
 		i++;

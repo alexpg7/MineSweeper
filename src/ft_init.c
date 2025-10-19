@@ -98,6 +98,12 @@ void	ft_putmines(t_vars *vars)
 	}
 }
 
+void	ft_initboard(t_vars *vars)
+{
+	ft_putgrid(vars);
+	ft_putmines(vars);
+	ft_putnumbers(vars);
+}
 
 void	ft_init(t_vars *vars)
 {
@@ -105,6 +111,7 @@ void	ft_init(t_vars *vars)
 	int	i;
 
 	g = vars->grid;
+	vars->end = 0;
 	vars->mat = (char **)malloc(sizeof(char *) * (g + 1));
 	vars->mat2 = (char **)malloc(sizeof(char *) * (g + 1));
 	if (!vars->mat || !vars->mat2)
@@ -121,8 +128,6 @@ void	ft_init(t_vars *vars)
 		if (!(vars->mat[i]) || !(vars->mat2[i]))
 			ft_exit(vars, 1);
 	}
-	ft_putgrid(vars);
-	ft_putmines(vars);
-	ft_putnumbers(vars);
+	ft_initboard(vars);
 	//ft_printmat(vars->mat2, vars->grid);
 }

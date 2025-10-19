@@ -58,6 +58,9 @@ typedef struct s_vars
 	char	**mat; //indicates the hidden cells
 	char	**mat2; //indicates the mines and numbers
 	int		n;
+	int		cx; //cell where we clicked
+	int		cy;
+	int		end;
 	t_sprite	*sprites;
 }	t_vars;
 
@@ -65,5 +68,7 @@ int		ft_exit(t_vars *vars, int ex);
 void	ft_init(t_vars *vars);
 void	ft_beginwin(t_vars *vars);
 void	ft_initsprites(t_vars *vars);
+void	ft_initboard(t_vars *vars);
 void	ft_paintboard(t_vars *vars);
+int		key_hook(int keycode, t_vars * vars);
 int		mouse_hook(int code, int x, int y, t_vars *vars);
