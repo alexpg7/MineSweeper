@@ -63,6 +63,7 @@ typedef struct s_vars
 	int		end;
 	int		count;
 	int		nmines;
+	int		flag;
 	t_sprite	*sprites;
 }	t_vars;
 
@@ -72,5 +73,7 @@ void	ft_beginwin(t_vars *vars);
 void	ft_initsprites(t_vars *vars);
 void	ft_initboard(t_vars *vars);
 void	ft_paintboard(t_vars *vars);
+void	ft_putmines(int a, int b, t_vars *vars);
+void	ft_putnumbers(t_vars *vars);
 int		key_hook(int keycode, t_vars * vars);
 int		mouse_hook(int code, int x, int y, t_vars *vars);

@@ -61,7 +61,19 @@ void	ft_putnumbers(t_vars *vars)
 	}
 }
 
-void	ft_putmines(t_vars *vars)
+int	ft_around(int r, int a, int b, int grid)
+{
+	int	i = r / grid;
+	int	j = r % grid;
+	int	dist1 = (i > a) * (i - a) + (i <= a) * (a - i);
+	int	dist2 = (j > b) * (j - b) + (j <= b) * (b - j);
+
+	if (dist1 > 1 || dist2 > 1)
+		return (1);
+	return (0);
+}
+
+void	ft_putmines(int a, int b, t_vars *vars)
 {
 	int	g;
 	int	j;
@@ -75,20 +87,26 @@ void	ft_putmines(t_vars *vars)
 	for (int i = 0; i < g; i++)
 	{
 		for (j = 0; j < g; j++)
-		{
 			vars->mat2[i][j] = 'O';
-		}
 		vars->mat2[i][j] = '\0';
 	}
-	for (int k = 0; k < nmines; k++)
+	for (int k = 0; k < nmines;)
 	{
-		r = rand() % (g * g);
+		while (1)
+		{
+			r = rand() % (g * g);
+			if (ft_around(r, a, b, g))
+				break ;
+		}
 		for (int i = 0; i < g; i++)
 		{
 			for (j = 0; j < g; j++)
 			{
 				if (r == i * g + j)
+				{
 					vars->mat2[i][j] = 'M';
+					k++;
+				}
 				else
 				{
 					if (vars->mat2[i][j] != 'M')
@@ -100,11 +118,16 @@ void	ft_putmines(t_vars *vars)
 	}
 }
 
+void	ft_printinstructions(void)
+{
+	ft_printf("INSTRUCTIONS:\n\tLeft click: unhide cell\n");
+	ft_printf("\tRight click: put flag\n\t\"R\": restart game\n");
+}
+
 void	ft_initboard(t_vars *vars)
 {
+	vars->flag = 0;
 	ft_putgrid(vars);
-	ft_putmines(vars);
-	ft_putnumbers(vars);
 }
 
 void	ft_init(t_vars *vars)
@@ -130,6 +153,7 @@ void	ft_init(t_vars *vars)
 		if (!(vars->mat[i]) || !(vars->mat2[i]))
 			ft_exit(vars, 1);
 	}
+	ft_printinstructions();
 	ft_initboard(vars);
 	//ft_printmat(vars->mat2, vars->grid);
 }

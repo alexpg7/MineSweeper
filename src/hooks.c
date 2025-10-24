@@ -49,6 +49,13 @@ int	key_hook(int keycode, t_vars * vars)
 	return (keycode);
 }
 
+void	ft_firstclick(int i, int j, t_vars *vars)
+{
+	ft_putmines(i, j, vars);
+	ft_putnumbers(vars);
+	vars->flag = 1;
+}
+
 int	mouse_hook(int code, int x, int y, t_vars *vars)
 {
 	int	pi;
@@ -62,6 +69,8 @@ int	mouse_hook(int code, int x, int y, t_vars *vars)
 		return (0);
 	if (code == 1)
 	{
+		if (vars->flag == 0)
+			ft_firstclick(pi, pj, vars);
 		if (vars->mat[pi][pj] == 'X')
 		{
 			vars->mat[pi][pj] = ' ';
