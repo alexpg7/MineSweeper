@@ -61,6 +61,8 @@ typedef struct s_vars
 	int		cx; //cell where we clicked
 	int		cy;
 	int		end;
+	int		count;
+	int		nmines;
 	t_sprite	*sprites;
 }	t_vars;
 

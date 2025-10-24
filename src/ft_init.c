@@ -12,6 +12,7 @@ void	ft_putgrid(t_vars *vars)
 	int	j;
 
 	g = vars->grid;
+	vars->count = 0;
 	for (int i = 0; i < g; i++)
 	{
 		for (j = 0; j < g; j++)
@@ -70,6 +71,7 @@ void	ft_putmines(t_vars *vars)
 	srand(time(NULL));
 	g = vars->grid;
 	nmines = 40 - (16 - g) * 30 / 7;
+	vars->nmines = nmines;
 	for (int i = 0; i < g; i++)
 	{
 		for (j = 0; j < g; j++)

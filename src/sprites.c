@@ -304,6 +304,7 @@ void	ft_initsprites(t_vars *vars)
 	ft_fill4(vars);
 	ft_fill5(vars);
 	ft_fill6(vars);
+	ft_fill7(vars);
 	ft_fill8(vars);
 	ft_fill9(vars);
 	ft_fillmine(vars);

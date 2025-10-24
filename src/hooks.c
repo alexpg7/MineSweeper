@@ -62,7 +62,7 @@ int	mouse_hook(int code, int x, int y, t_vars *vars)
 		return (0);
 	if (code == 1)
 	{
-		if (vars->mat[pi][pj] != 'F')
+		if (vars->mat[pi][pj] == 'X')
 		{
 			vars->mat[pi][pj] = ' ';
 			if (vars->mat2[pi][pj] == ' ')
@@ -71,6 +71,13 @@ int	mouse_hook(int code, int x, int y, t_vars *vars)
 			{
 				ft_showmines(vars);
 				ft_paintboard(vars);
+				ft_printf("YOU LOSE!\npress \"R\" to restart.\n");
+				vars->end = 1;
+			}
+			vars->count++;
+			if (vars->count >= vars->grid * vars->grid - vars->nmines)
+			{
+				ft_printf("YOU WIN!\n");
 				vars->end = 1;
 			}
 		}
@@ -83,10 +90,5 @@ int	mouse_hook(int code, int x, int y, t_vars *vars)
 			vars->mat[pi][pj] = 'F';
 	}
 	ft_paintboard(vars);
-	/*if (ft_checkwin(vars) == 1)
-	{
-		ft_printf("YOU WIN!\n");
-		vars->end = 1;
-	}*/
 	return (vars->grid);
 }
