@@ -1,8 +1,9 @@
 #include "minesweeper.h"
 
-void	ft_cleanzeros(t_vars *vars, int x, int y)
+int	ft_cleanzeros(t_vars *vars, int x, int y)
 {
 	int	g = vars->grid;
+	int	count = 0;
 
 	for (int i = -1; i < 2; i++)
 	{
@@ -15,12 +16,14 @@ void	ft_cleanzeros(t_vars *vars, int x, int y)
 				if (vars->mat[x + i][y + j] == 'X')
 				{
 					vars->mat[x + i][y + j] = ' ';
+					count++;
 					if (vars->mat2[x + i][y + j] == ' ')
-						ft_cleanzeros(vars, x + i, y + j);
+						count += ft_cleanzeros(vars, x + i, y + j);
 				}
 			}
 		}
 	}
+	return (count);
 }
 
 void	ft_showmines(t_vars *vars)
@@ -75,7 +78,7 @@ int	mouse_hook(int code, int x, int y, t_vars *vars)
 		{
 			vars->mat[pi][pj] = ' ';
 			if (vars->mat2[pi][pj] == ' ')
-				ft_cleanzeros(vars, pi, pj);
+				vars->count += ft_cleanzeros(vars, pi, pj);
 			else if (vars->mat2[pi][pj] == 'M')
 			{
 				ft_showmines(vars);
