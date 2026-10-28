@@ -20,7 +20,7 @@ make
 
 > [!WARNING]
 > The **mlx_linux/configure** file can lead to some problems during the compilation.
-> 
+>
 > To solve them, execute
 > ```bash
 > chmod 777 mlx_linux/configure
